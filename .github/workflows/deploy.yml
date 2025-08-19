@@ -18,4 +18,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_KEY }}
           REMOTE_HOST: ${{ secrets.EC2_HOST }}
           REMOTE_USER: ${{ secrets.EC2_USER }}
+          # Deploy only contents, not folder
+          SOURCE: "./"
           TARGET: /var/www/html
+          ARGS: "-avzr --delete"
