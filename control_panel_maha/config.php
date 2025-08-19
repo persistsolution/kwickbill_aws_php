@@ -12,7 +12,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if($conn->connect_error) {
     die("connection failed : " . $conn->connect_error);
 } else {
-     echo "Successfully Connected";
+     //echo "Successfully Connected";
 }
 $Proj_Title = "Maha Chai";
 $SiteUrl = "https://mahabuddy.com/";
