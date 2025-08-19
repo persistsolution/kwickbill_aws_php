@@ -1,0 +1,4 @@
+[02-Jun-2025 08:28:27 UTC] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/persistsolution/public_html/kwickfoods.in/exeapp_dev/ajax_files/ajax_expenses_mult_prod_test.php on line 259
+[24-Jun-2025 07:29:27 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/persistsolution/public_html/kwickfoods.in/exeapp_dev/ajax_files/ajax_nso_vendor_expenses.php on line 114
+[24-Jun-2025 07:29:44 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/persistsolution/public_html/kwickfoods.in/exeapp_dev/ajax_files/ajax_nso_vendor_expenses.php on line 114
+[11-Aug-2025 09:43:22 UTC] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0

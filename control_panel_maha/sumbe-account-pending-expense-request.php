@@ -1,0 +1,408 @@
+<?php 
+session_start();
+include_once 'config.php';
+include_once 'auth.php';
+$user_id = $_SESSION['Admin']['id'];
+$MainPage = "Account-Expenses";
+$Page = "Account-Peding-Expense-Request".$_GET['val'].$_GET['amount'].$_GET['days'];
+?>
+<!DOCTYPE html>
+<html lang="en" class="default-style">
+<head>
+<title><?php echo $Proj_Title; ?> </title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="description" content="" />
+<meta name="keywords" content="">
+<meta name="author" content="" />
+<?php include_once 'header_script.php'; ?>
+</head>
+<body>
+
+ <div class="layout-wrapper layout-1 layout-without-sidenav">
+<div class="layout-inner">
+
+ <?php include_once 'top_header.php'; include_once 'sidebar.php'; ?>
+
+
+<div class="layout-container">
+
+
+
+<?php
+if($_REQUEST["action"]=="delete")
+{
+  $id = $_REQUEST["id"];
+  $sql11 = "DELETE FROM tbl_expense_request WHERE id = '$id'";
+  $conn->query($sql11);
+  $sql = "DELETE FROM wallet WHERE ExpId='$id'";
+  $conn->query($sql);
+  ?>
+    <script type="text/javascript">
+      alert("Deleted Successfully!");
+      window.location.href="expense-request.php";
+    </script>
+<?php } 
+
+?>
+
+<div class="layout-content">
+
+<div class="container-fluid flex-grow-1 container-p-y">
+<h4 class="font-weight-bold py-3 mb-0">Accountant Pending Expense Request
+  
+</h4>
+
+<div class="card" style="padding: 10px;">
+<div class="card-datatable table-responsive">
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Expense Id</th>
+                 <th>Manager Approve</th>
+                  <th>Admin/Account Approve</th>
+                  <?php if($Roll == 1){?>
+                  <th>Action</th>
+                  <?php } ?>
+                   <th>Expense Date</th>
+               <th>Photo</th>
+                <th>Employee Name</th>
+                 <th>Category</th>
+                 <!--<th>Franchise</th>
+                 <th>Locations</th>-->
+                <th>Vendor Mobile No</th>
+                <th>Amount</th>
+                <th>PaymentMode</th>
+                <th>Narration</th>
+                 <th>Receipt</th>
+                 <th>Payment Receipt</th>
+                <th>Status</th>
+               
+               
+                
+               
+            </tr>
+        </thead>
+        <tbody> 
+            <?php 
+          
+            $sql = "SELECT te.*,tu.Fname,tu.Lname,tu.Photo AS Uphoto,tu2.Fname AS MgrName,tu3.Fname AS AccName,tec.Name As ExpCatName,tub.ShopName,tl.Name AS ExpLocation FROM tbl_expense_request te 
+                INNER JOIN tbl_users tu ON tu.id=te.UserId 
+                LEFT JOIN tbl_users tu2 ON tu2.id=te.MrgBy 
+                LEFT JOIN tbl_users tu3 ON tu3.id=te.AccBy 
+                LEFT JOIN tbl_expenses_category tec ON tec.id=te.ExpCatId 
+                LEFT JOIN tbl_users_bill tub ON tub.id=te.FrId 
+                LEFT JOIN tbl_locations tl ON tl.id=te.Locations WHERE te.AdminStatus=0 AND te.UserId=1322 AND te.ExpCatId!=3";
+            
+            if($_GET['days'] == '7'){
+                $sql.=" AND te.TotDays>=7";
+            }
+            if($_GET['amount'] == '5000'){
+                $sql.=" AND te.ManagerStatus=1 AND te.Amount<=5000";
+            }
+            if($_GET['amount'] == '5001'){
+                $sql.=" AND te.ManagerStatus=1 AND te.Amount>5000";
+            }
+            //$sql.=" AND te.ManagerStatus!=2";
+             $sql.=" ORDER BY te.CreatedDate DESC";  
+            //echo $sql;
+            $res = $conn->query($sql);
+            while($row = $res->fetch_assoc())
+            {
+                 $MgrName = $row['MgrName'];
+                 $AccName = $row['AccName'];
+                 if($row['TotDays']>=0 && $row['TotDays']<=6){
+                     $totdays = 0; //less than 7
+                 }
+                 else{
+                     $totdays = 1; // more than 7
+                 }
+             ?>
+            <tr>
+                <td><?php echo $row['id'];?></td>
+                <?php if($totdays==0){?>
+                <td><?php if($row['ManagerStatus']=='1'){ echo "<span style='color:green;'>Approved<br>By $MgrName </span>";} else if($row['ManagerStatus']=='2'){ echo "<span style='color:red;'>Rejected <br> By $MgrName</span>";} else {?>
+                 <a href="approve-expense-by-manager.php?id=<?php echo $row['id']; ?>"><span style='color:orange;'>Pending By Manager</span><?php } ?></a></td>
+                 <?php } else { ?>
+                 <td></td>
+                 <?php } ?>
+                
+  <td id="showstatus<?php echo $row['id']; ?>"><?php if($row['AdminStatus']=='1'){ echo "<span style='color:green;'>Approved<br>By $AccName </span>";} else if($row['AdminStatus']=='2'){ echo "<span style='color:red;'>Rejected <br> By $AccName </span>";} else {?>
+<a href="approve-expense-by-account.php?id=<?php echo $row['id']; ?>">Approve By Admin/Account</a><br>
+  <!--<a href="javascript:void(0)" id="add_button<?php echo $row['id']; ?>" onclick="getExpenseVal(<?php echo $row['id']; ?>)">Approve Expenses</a>-->
+ <?php } ?>
+ 
+ </td>
+  <?php if($Roll == 1){?>
+  <td><a href="edit-expenses.php?id=<?php echo $row['id']; ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="lnr lnr-pencil mr-2"></i></a>&nbsp;&nbsp;
+  <a onClick="return confirm('Are you sure you want delete this expense');" href="<?php echo $_SERVER['PHP_SELF']; ?>?id=<?php echo $row['id']; ?>&action=delete" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="lnr lnr-trash text-danger"></i></a></td>
+  <?php } ?>
+   <td><?php echo date("d/m/Y", strtotime(str_replace('-', '/',$row['ExpenseDate']))); ?></td>
+               <td> <?php if($row["Uphoto"] == '') {?>
+                  <img src="user_icon.jpg" class="d-block ui-w-40 rounded-circle"  style="width: 40px;height: 40px;"> 
+                 <?php } else if(file_exists('../uploads/'.$row["Uphoto"])){?>
+                 <img src="../uploads/<?php echo $row["Uphoto"];?>" class="d-block ui-w-40 rounded-circle" alt="" style="width: 40px;height: 40px;">
+                  <?php }  else{?>
+                 <img src="user_icon.jpg" class="d-block ui-w-40 rounded-circle" style="width: 40px;height: 40px;"> 
+             <?php } ?></td>
+               <td><?php echo $row['Fname']." ".$row['Lname']; ?></td>
+               <td><?php echo $row['ExpCatName'];?></td>
+               <!--<td><?php echo $row['ShopName'];?></td>
+               <td><?php echo $row['ExpLocation'];?></td>-->
+              <td><?php echo $row['VedPhone']; ?></td>
+                
+                <td><?php echo $row['Amount']; ?></td>
+               <td><?php echo $row['PaymentMode']; ?></td>
+                  <td><?php echo $row['Narration']; ?></td>
+              <td><?php if($row["Photo"] == '') {?>
+                  <span style="color:red;">No Receipt Found</span>
+                 <?php } else if(file_exists('../uploads/'.$row["Photo"])){?>
+                 <a href="../uploads/<?php echo $row["Photo"];?>" target="_blank">View Receipt</a>
+                  <?php }  else{?>
+                <span style="color:red;">No Receipt Found</span>
+             <?php } ?></td>
+             
+             <td><?php if($row["Photo2"] == '') {?>
+                  <span style="color:red;">No Receipt Found</span>
+                 <?php } else if(file_exists('../uploads/'.$row["Photo2"])){?>
+                 <a href="../uploads/<?php echo $row["Photo2"];?>" target="_blank">View Receipt</a>
+                  <?php }  else{?>
+                <span style="color:red;">No Receipt Found</span>
+             <?php } ?></td>
+                     
+                 <td><?php if($row['Status']=='1'){echo "<span style='color:green;'>Approved</span>";} else { echo "<span style='color:red;'>Pending</span>";} ?></td>
+              
+           
+           
+            </tr>
+            
+            
+           <?php } ?>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+<div class="modal fade insert_frm" id="modals-default">
+<div class="modal-dialog">
+<form class="modal-content" id="validation-form" method="post" novalidate="novalidate" autocomplete="off">
+<div class="modal-header">
+<h5 class="modal-title">Approve  
+<span class="font-weight-light">Expense</span>
+</h5>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+</div>
+<div class="modal-body">
+    <div class="form-row">
+        <input type="hidden" name="id" value="" id="id">
+        <input type="hidden" name="EmpId" value="" id="EmpId">
+       <input type="hidden" name="action" value="Save" id="action">
+ <div class="form-group col-md-12">
+                                            <label class="form-label">Employee Name</label>
+                                            <input type="text" id="EmplName" class="form-control"
+                                                placeholder="" value="<?php echo $row7['Fname']." ".$row7['Lname']; ?>" readonly>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        
+                                         <div class="form-group col-md-4">
+                                            <label class="form-label">Wallet Amount</label>
+                                            <input type="text" class="form-control" id="Wallet"
+                                                placeholder="" value="<?php echo $Wallet; ?>" readonly>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        
+                                         <div class="form-group col-md-4">
+                                            <label class="form-label">Expense Amount</label>
+                                            <input type="text" name="ExpenseAmt" class="form-control" id="ExpenseAmt"
+                                                placeholder="" value="<?php echo $row7["Amount"]; ?>" readonly>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-4">
+                                            <label class="form-label">Manager Approve Amount</label>
+                                            <input type="text" name="MgrAmount" class="form-control" id="MgrAmount"
+                                                placeholder="" value="<?php echo $row7["MgrAmount"]; ?>" readonly>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label">Final Approve Amount <span class="text-danger">*</span></label>
+                                            <input type="text" name="AccAmount" class="form-control" id="AccAmount"
+                                                placeholder="" value="<?php echo $row7["Amount"]; ?>" required>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label">Expense Date</label>
+                                            <input type="date" name="ExpenseDate" class="form-control" id="ExpenseDate"
+                                                placeholder="" value="<?php echo $row7["ExpenseDate"]; ?>" readonly>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        
+                                         <div class="form-group col-md-12">
+                                            <label class="form-label">Expense For</label>
+                                            <input type="text" name="ExpenseFor" class="form-control" id="ExpenseFor"
+                                                placeholder="" value="<?php echo $row7["Narration"]; ?>" readonly>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+ <div class="form-group col-md-6">
+                                            <label class="form-label">Approve Date <span class="text-danger">*</span></label>
+                                            <input type="date" name="ApproveDate" id="ApproveDate" class="form-control"
+                                                placeholder="" value="<?php echo $row7["ApproveDate"]; ?>" required>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+ <div class="form-group col-md-6">
+                                            <label class="form-label">Status <span class="text-danger">*</span></label>
+                                            <select class="form-control" id="ManagerStatus" name="ManagerStatus" required="">
+                                                <option selected="" disabled="" value="">Select Status</option>
+                                                <option value="1" <?php if($row7["ManagerStatus"]=='1') {?> selected
+                                                    <?php } ?>>Approved</option>
+                                                <option value="0" <?php if($row7["ManagerStatus"]=='0') {?> selected
+                                                    <?php } ?>>Pending</option>
+                                                    <option value="2" <?php if($row7["ManagerStatus"]=='2') {?> selected
+                                                    <?php } ?>>Reject</option>
+                                            </select>
+                                            <div class="clearfix"></div>
+                                        </div>
+ <div class="form-group col-md-12">
+                                            <label class="form-label">Comment</label>
+                                            <textarea id="MannagerComment" name="MannagerComment" class="form-control"
+                                                placeholder=""></textarea>
+                                            <div class="clearfix"></div>
+                                        </div>
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<button type="submit" class="btn btn-danger" id="submit" name="submit">Submit</button>
+</div>
+</form>
+</div>
+</div>
+
+<?php include_once 'footer.php'; ?>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="layout-overlay layout-sidenav-toggle"></div>
+</div>
+
+
+<?php include_once 'footer_script.php'; ?>
+
+<script type="text/javascript">
+function getExpenseVal(id){
+     $('#add_button'+id).text('Please Wait...');
+    var action = "fetch_expense_details";
+ $.ajax({  
+                url:"ajax_files/ajax_expense_details.php",  
+                method:"POST",  
+                data:{action:action,id:id},  
+                success:function(data){  
+                    var res = JSON.parse(data);
+                    var rowdata = res.rowdata;
+                    var walletamt = res.walletamt;
+                    $('#EmplName').val(rowdata.Fname);  
+                    $('#Wallet').val(walletamt); 
+                    $('#ExpenseAmt').val(rowdata.Amount); 
+                    $('#MgrAmount').val(rowdata.MgrAmount); 
+                     $('#AccAmount').val(rowdata.MgrAmount); 
+                    $('#ExpenseDate').val(rowdata.ExpenseDate); 
+                    $('#ExpenseFor').val(rowdata.Narration); 
+                       $('#id').val(id);  
+                       $('#EmpId').val(rowdata.UserId);  
+                      setTimeout(function(){  
+            $('.insert_frm').modal('show');
+             $('#add_button'+id).text('Approve By Popup');
+        }, 1000);
+                     
+                }  
+           });
+}
+ function changeStatus(id,val){
+     window.location.href='expense-request.php?action=changestatus&id='+id+'&status='+val;
+ }
+ 
+   function error_toast(){
+    var isRtl = $('body').attr('dir') === 'rtl' || $('html').attr('dir') === 'rtl';
+   $.growl.error({
+      title:    'Error',
+      message:  'Record Not Saved',
+      location: isRtl ? 'tl' : 'tr'
+    });
+  }
+ 
+    function success_toast(){
+    var isRtl = $('body').attr('dir') === 'rtl' || $('html').attr('dir') === 'rtl';
+   $.growl.success({
+      title:    'Success',
+      message:  'Approved Successfully!',
+      location: isRtl ? 'tl' : 'tr'
+    });
+  }
+    $(document).ready(function() {
+    $('#example').DataTable({
+    });
+    
+    $('#validation-form').on('submit', function(e){
+      e.preventDefault();    
+      var action = $('#action').val();
+    if ($('#validation-form').valid()){ 
+         $.ajax({  
+                url :"ajax_files/ajax_expense_details.php",  
+                method:"POST",  
+                data:new FormData(this),  
+                contentType:false,  
+                processData:false,  
+                 beforeSend:function(){
+     $('#submit').attr('disabled','disabled');
+     $('#submit').text('Please Wait...');
+    },
+                success:function(data){ 
+                    console.log(data);
+               var res = JSON.parse(data);
+               var response = res.response;
+               var id = res.id;
+               var status = res.status;
+                    if(response == 1){
+                        $('#showstatus'+id).html(status);
+                      success_toast();
+                      $('#EmplName').val('');  
+                    $('#Wallet').val('');
+                    $('#ExpenseAmt').val('');
+                    $('#MgrAmount').val('');
+                    $('#MgrAmount').val('');
+                    $('#ExpenseDate').val('');
+                    $('#AccAmount').val('');
+                    $('#ExpenseFor').val('');
+                    $('#MannagerComment').val('');
+                      $('.insert_frm').modal('hide'); 
+                      
+                    }
+                    else{
+                      error_toast();
+                      $('.insert_frm').modal('show'); 
+                    }
+                      $('#submit').attr('disabled',false);
+                       $('#submit').text('Submit');
+                        $('#action').val("Save");  
+                }  
+           })  
+
+  }
+else{
+    return false;
+}
+  });
+});
+</script>
+</body>
+</html>

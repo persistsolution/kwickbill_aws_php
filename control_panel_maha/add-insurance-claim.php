@@ -1,0 +1,340 @@
+<?php 
+session_start();
+include_once 'config.php';
+include_once 'auth.php';
+$user_id = $_SESSION['Admin']['id'];
+$MainPage = "Insurance";
+$Page = "Add-Insurance-Claim";
+?>
+<!DOCTYPE html>
+<html lang="en" class="default-style">
+
+<head>
+    <title><?php echo $Proj_Title; ?> - <?php if($_GET['id']) {?>Edit <?php } else{?> Add <?php } ?> Raw Stock
+    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="" />
+
+    <?php include_once 'header_script.php'; ?>
+    <script src="ckeditor/ckeditor.js"></script>
+</head>
+
+<body>
+    <style type="text/css">
+    .password-tog-info {
+        display: inline-block;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        position: absolute;
+        right: 50px;
+        top: 30px;
+        text-transform: uppercase;
+        z-index: 2;
+    }
+    </style>
+     <div class="layout-wrapper layout-1 layout-without-sidenav">
+        <div class="layout-inner">
+
+             <?php include_once 'top_header.php'; include_once 'sidebar.php'; ?>
+
+
+            <div class="layout-container">
+
+                
+
+                <?php 
+$id = $_GET['id'];
+$sql7 = "SELECT * FROM tbl_insurance_clain WHERE id='$id'";
+$row7 = getRecord($sql7);
+
+
+if(isset($_POST['submit'])){
+    $CustId = addslashes(trim($_POST["CustId"]));
+     $CellNo = addslashes(trim($_POST["CellNo"]));
+    $CustName = addslashes(trim($_POST["CustName"]));
+$Status = 1;
+$Address = addslashes(trim($_POST["Address"]));
+$DocumentsStatus = addslashes(trim($_POST['DocumentsStatus']));
+$ClainReason = addslashes(trim($_POST["ClainReason"]));
+$ClainStatus = addslashes(trim($_POST["ClainStatus"]));
+$BranchId = addslashes(trim($_POST["BranchId"]));
+$CreatedDate = date('Y-m-d');
+$ModifiedDate = date('Y-m-d');
+
+
+if($_GET['id']==''){
+     $qx = "INSERT INTO tbl_insurance_clain SET CustId='$CustId',CellNo='$CellNo',CustName = '$CustName',Status='$Status',Address='$Address',DocumentsStatus='$DocumentsStatus',ClainReason = '$ClainReason',ClainStatus='$ClainStatus',CreatedDate='$CreatedDate',CreatedBy='$user_id',BranchId='$BranchId'";
+  $conn->query($qx);
+  $PostId = mysqli_insert_id($conn);
+  $TicketNo= "#".rand(1000,9999);
+  $sql = "UPDATE tbl_insurance_clain SET TicketNo='$TicketNo' WHERE id='$PostId'";
+  $conn->query($sql);
+  echo "<script>alert('Insurance Claim Record Saved Successfully!');window.location.href='view-insurance-claim.php';</script>";
+}
+else{
+ 
+    $query2 = "UPDATE tbl_insurance_clain SET CustId='$CustId',CellNo='$CellNo',CustName = '$CustName',Status='$Status',Address='$Address',DocumentsStatus='$DocumentsStatus',ClainReason = '$ClainReason',ClainStatus='$ClainStatus',ModifiedDate='$ModifiedDate',ModifiedBy='$user_id',BranchId='$BranchId' WHERE id = '$id'";
+  $conn->query($query2);
+  echo "<script>alert('Insurance Claim Record Updated Successfully!');window.location.href='view-insurance-claim.php';</script>";
+
+}
+    //header('Location:courses.php'); 
+
+  }
+?>
+
+                <div class="layout-content">
+
+                    <div class="container-fluid flex-grow-1 container-p-y">
+                        <h4 class="font-weight-bold py-3 mb-0"><?php if($_GET['id']) {?>Edit <?php } else{?> Add
+                            <?php } ?> Insurance Claim</h4>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                 <form id="validation-form" method="post" autocomplete="off">
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                <div id="alert_message"></div>
+                               
+                                    <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" id="userid">
+                                    <input type="hidden" name="action" value="Save" id="action">
+                                    <div class="form-row">
+                                    
+                                     <div class="form-group col-md-12">
+<label class="form-label"> Store/State<span class="text-danger">*</span></label>
+ <select class="form-control" name="BranchId" id="BranchId" required>
+<?php 
+ if($Roll == 1 || $Roll == 7){?>
+<option selected="" value="">Select State</option>
+<?php }
+ if($Roll == 1 || $Roll == 7){
+  $sql12 = "SELECT * FROM tbl_branch WHERE Status='1'";
+}
+else{
+  $sql12 = "SELECT * FROM tbl_branch WHERE Status='1' AND id='$BranchId'";
+}
+
+  $row12 = getList($sql12);
+  foreach($row12 as $result){
+     ?>
+  <option <?php if($row7["BranchId"] == $result['id']) {?> selected <?php } ?> value="<?php echo $result['id'];?>">
+    <?php echo $result['Name']; ?></option>
+<?php } ?>
+</select>
+<div class="clearfix"></div>
+</div>
+
+                                    <div class="form-group col-md-12" style="padding-top:10px;">
+<label class="form-label"> Customer<span class="text-danger">*</span></label>
+ <select class="select2-demo form-control" name="CustId" id="CustId" required>
+<option selected="" value="">Select Customer</option>
+ <?php 
+  $sql12 = "SELECT * FROM tbl_users WHERE Status='1' AND Roll=5";
+  $row12 = getList($sql12);
+  foreach($row12 as $result){
+     ?>
+  <option <?php if($row7["CustId"] == $result['id']) {?> selected <?php } ?> value="<?php echo $result['id'];?>">
+    <?php echo $result['Fname']." (".$result['Phone'].")"; ?></option>
+<?php } ?>
+</select>
+<div class="clearfix"></div>
+</div>
+
+<!-- <div class="form-group col-md-2" style="padding-top: 30px;">
+<label class="form-label">&nbsp;</label>
+<button class="btn btn-secondary" type="button" onclick="addVendor()">+</button>
+</div> -->
+
+                  
+
+<div class="form-group col-md-12">
+                                            <label class="form-label">Contact No </label>
+                                            <input type="text" name="CellNo" id="CellNo" class="form-control"
+                                                placeholder="" value="<?php echo $row7["CellNo"]; ?>"
+                                                autocomplete="off" oninput="getUserDetails()">
+                                            <div class="clearfix"></div>
+                                        </div>
+  <div class="form-group col-md-12">
+   <label class="form-label">Customer Name </label>
+     <input type="text" name="CustName" id="CustName" class="form-control"
+                                                placeholder="" value="<?php echo $row7["CustName"]; ?>"
+                                                autocomplete="off">
+    <div class="clearfix"></div>
+ </div> 
+
+ <div class="form-group col-md-12">
+   <label class="form-label">Address</label>
+     <textarea name="Address" id="Address" class="form-control"  
+                                                ><?php echo $row7['Address']; ?></textarea>
+    <div class="clearfix"></div>
+ </div>   
+
+
+  <div class="form-group col-md-4">
+<label class="form-label"> Insurance Claim Documents Status<span class="text-danger">*</span></label>
+ <select class="form-control" name="DocumentsStatus" id="DocumentsStatus" required>
+
+<option selected="" value="">Select</option>
+
+  <option value="Received" <?php if($row7['DocumentsStatus'] == 'Received'){?> selected <?php } ?>>Received</option>
+    <option value="Not Received" <?php if($row7['DocumentsStatus'] == 'Not Received'){?> selected <?php } ?>>Not Received</option>
+</select>
+<div class="clearfix"></div>
+</div>
+
+<div class="form-group col-lg-4">
+<label class="form-label"> Reason for insurance claim<span class="text-danger">*</span></label>
+ <select class="form-control" name="ClainReason" id="ClainReason" required>
+<option selected="" value="">Select</option>
+ <?php 
+  $sql12 = "SELECT * FROM tbl_common_master WHERE Status='1' AND Roll=5";
+  $row12 = getList($sql12);
+  foreach($row12 as $result){
+     ?>
+  <option <?php if($row7['ClainReason'] == $result['Name']){?> selected <?php } ?> value="<?php echo $result['Name'];?>">
+    <?php echo $result['Name']; ?></option>
+<?php } ?>
+</select>
+<div class="clearfix"></div>
+</div>
+
+
+<div class="form-group col-lg-4">
+<label class="form-label"> Insurance Claim Status<span class="text-danger">*</span></label>
+ <select class="form-control" name="ClainStatus" id="ClainStatus" required>
+<option selected="" value="">Select</option>
+ <?php 
+  $sql12 = "SELECT * FROM tbl_common_master WHERE Status='1' AND Roll=6";
+  $row12 = getList($sql12);
+  foreach($row12 as $result){
+     ?>
+  <option <?php if($row7['ClainStatus'] == $result['Name']){?> selected <?php } ?> value="<?php echo $result['Name'];?>">
+    <?php echo $result['Name']; ?></option>
+<?php } ?>
+</select>
+<div class="clearfix"></div>
+</div>
+
+
+ 
+
+</div>
+<br>
+
+                                   <div class="form-row">
+                                    <div class="form-group col-md-2">
+                                    <button type="submit" name="submit" class="btn btn-primary btn-finish" id="submit">Submit</button>
+                                    </div>
+
+                
+                                    </div>
+                               </div>
+
+
+ <div class="col-lg-5" id="emidetails" style="display:none;">
+    
+
+ </div>
+
+  
+                                
+
+ </div>
+ </form>
+
+
+
+
+
+                            </div>
+                        </div>
+
+
+
+</div>
+
+
+                   
+
+
+                    <?php include_once 'footer.php'; ?>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="layout-overlay layout-sidenav-toggle"></div>
+    </div>
+
+
+    <?php include_once 'footer_script.php'; ?>
+<script type="text/javascript">
+ 
+    function getUserDetails(){
+        var CellNo = $('#CellNo').val();
+        var action = "getUserDetails2";
+            $.ajax({
+                url: "ajax_files/ajax_vendor.php",
+                method: "POST",
+                data: {
+                    action: action,
+                    CellNo: CellNo
+                },
+                dataType:"json",  
+                success: function(data) {
+                    $('#Address').val(data.Address);
+                    $('#CustName').val(data.Fname+" "+data.Lname);
+                    $('#Gname').val(data.Gname);
+                    $('#Gphone').val(data.Gphone);
+                    $('#Gname2').val(data.Gname2);
+                    $('#Gphone2').val(data.Gphone2);
+                    $('#AgentName').val(data.AgentName);
+                    
+                }
+            });
+
+    }
+     $(document).ready(function() {
+
+
+     $(document).on("change", "#CustId", function(event) {
+            var val = this.value;
+            var action = "getUserDetails";
+            $.ajax({
+                url: "ajax_files/ajax_vendor.php",
+                method: "POST",
+                data: {
+                    action: action,
+                    id: val
+                },
+                dataType:"json",  
+                success: function(data) {
+                    
+                    $('#Address').val(data.Taluka+", "+data.Village+", "+data.District);
+                    $('#CustName').val(data.Fname);
+                    $('#CellNo').val(data.Phone);
+                     $('#Gname').val(data.Gname);
+                    $('#Gphone').val(data.Gphone);
+                    $('#Gname2').val(data.Gname2);
+                    $('#Gphone2').val(data.Gphone2);
+                    $('#AgentName').val(data.AgentName);
+                }
+            });
+
+        });
+
+
+    });
+
+     
+ </script>
+</body>
+
+</html>

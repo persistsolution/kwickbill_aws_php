@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Note Recorder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #0056b3;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .status {
+      margin-top: 1rem;
+      color: #28a745;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🎤 Voice Note Recorder</h2>
+    <button id="start">Start Recording</button>
+    <button id="stop" disabled>Stop Recording</button>
+    <audio id="player" controls></audio>
+    <form id="uploadForm" method="POST">
+      <input type="hidden" name="audioData" id="audioData">
+      <button type="submit" id="uploadBtn" disabled>Upload</button>
+    </form>
+    <div class="status" id="statusMsg"></div>
+  </div>
+
+  <script>
+    let mediaRecorder;
+    let audioChunks = [];
+
+    const startBtn = document.getElementById('start');
+    const stopBtn = document.getElementById('stop');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const audioData = document.getElementById('audioData');
+    const player = document.getElementById('player');
+    const statusMsg = document.getElementById('statusMsg');
+
+    startBtn.onclick = async () => {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+
+      mediaRecorder.ondataavailable = e => {
+        audioChunks.push(e.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        player.src = audioUrl;
+
+        const reader = new FileReader();
+        reader.readAsDataURL(audioBlob);
+        reader.onloadend = () => {
+          audioData.value = reader.result;
+          uploadBtn.disabled = false;
+          statusMsg.textContent = "Ready to upload.";
+        };
+      };
+
+      mediaRecorder.start();
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
+      statusMsg.textContent = "Recording...";
+    };
+
+    stopBtn.onclick = () => {
+      mediaRecorder.stop();
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+    };
+
+    document.getElementById('uploadForm').onsubmit = function (e) {
+      e.preventDefault();
+      statusMsg.textContent = "Uploading...";
+
+      fetch('upload.php', {
+        method: 'POST',
+        body: new FormData(this)
+      }).then(response => response.text())
+        .then(data => {
+          statusMsg.textContent = data;
+          uploadBtn.disabled = true;
+        });
+    };
+  </script>
+</body>
+</html>

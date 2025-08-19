@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule order/(.*)/ home.php?pageurl=$1
+RewriteRule order/(.*) home.php?pageurl=$1

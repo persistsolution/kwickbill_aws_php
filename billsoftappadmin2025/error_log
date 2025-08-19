@@ -1,0 +1,7 @@
+[30-Sep-2023 18:08:30 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/mahabudd/public_html/billsoft/orders.php on line 88
+[03-Oct-2023 05:11:24 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/mahabudd/public_html/billsoftapp/customer-invoice-mobile.php on line 344
+[13-Aug-2024 04:35:17 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/persistsolution/public_html/kwickfoods.in/billsoftappadmin/total-invoice.php on line 204
+[31-Oct-2024 06:14:41 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/persistsolution/public_html/kwickfoods.in/billsoftappadmin/daily-sale-report.php on line 135
+[07-Jan-2025 11:24:44 UTC] PHP Parse error:  syntax error, unexpected '$row2' (T_VARIABLE), expecting ',' or ';' in /home/persistsolution/public_html/kwickfoods.in/billsoftappadmin2025/target-completion.php on line 230
+[04-Jun-2025 08:09:26 UTC] PHP Parse error:  syntax error, unexpected '/' in /home/persistsolution/public_html/kwickfoods.in/billsoftappadmin2025/dashboard.php on line 309
+[23-Jul-2025 09:49:06 UTC] PHP Parse error:  syntax error, unexpected '$row' (T_VARIABLE) in /home/persistsolution/public_html/kwickfoods.in/billsoftappadmin2025/view-mrp-product-stock-request.php on line 90

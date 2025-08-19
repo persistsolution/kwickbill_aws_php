@@ -1,0 +1,119 @@
+INSERT INTO tbl_bank_details (AccountName, BankName, AccountNo, Branch, IfscCode, userid, type)
+SELECT DISTINCT u.AccountName, u.BankName, u.AccountNo, u.Branch, u.IfscCode, u.id, 1
+FROM tbl_users u
+WHERE u.AccountNo != ''
+  AND u.IfscCode != ''
+  AND u.Roll NOT IN (1,5,55,9,22,23,63,3)
+  AND u.OtherEmp = 0
+  AND u.Status = 1
+  AND NOT EXISTS (
+      SELECT 1 FROM tbl_bank_details b
+      WHERE b.AccountNo = u.AccountNo AND b.IfscCode = u.IfscCode
+  );
+
+
+
+//all
+SELECT 
+    tci.FrId,
+    tub.ShopName,
+    MONTH(tci.InvoiceDate) AS Month,
+    YEAR(tci.InvoiceDate) AS Year,
+    SUM(tci.SubTotal) AS TotalSubTotal,
+    SUM(tci.Discount) AS TotalDiscount,
+    SUM(tci.NetAmount) AS TotalNetAmount
+FROM 
+    tbl_customer_invoice tci
+JOIN 
+    tbl_users_bill tub ON tci.FrId = tub.id
+WHERE 
+    tci.InvoiceDate >= '2024-01-01' 
+    AND tci.InvoiceDate <= '2024-12-31'
+    AND tci.FrId != 0
+GROUP BY 
+    tci.FrId, tub.ShopName, YEAR(tci.InvoiceDate), MONTH(tci.InvoiceDate)
+ORDER BY 
+    tci.FrId, Year, Month;
+
+
+//samrudhi
+SELECT tci.FrId, tub.ShopName, MONTH(tci.InvoiceDate) AS Month, YEAR(tci.InvoiceDate) AS Year, SUM(tci.SubTotal) AS TotalSubTotal, SUM(tci.Discount) AS TotalDiscount, SUM(tci.NetAmount) AS TotalNetAmount FROM tbl_customer_invoice tci JOIN tbl_users_bill tub ON tci.FrId = tub.id WHERE tci.InvoiceDate >= '2024-01-01' AND tci.InvoiceDate <= '2024-12-31' AND tci.FrId IN ( SELECT id FROM tbl_users WHERE ZoneId = 12 AND Roll = 5 ) GROUP BY tci.FrId, tub.ShopName, YEAR(tci.InvoiceDate), MONTH(tci.InvoiceDate) ORDER BY tci.FrId, Year, Month;
+
+
+//all outlet datewise
+SELECT 
+    tci.FrId,
+    tub.ShopName,
+    tci.InvoiceDate,
+    SUM(tci.SubTotal) AS TotalSubTotal,
+    SUM(tci.Discount) AS TotalDiscount,
+    SUM(tci.NetAmount) AS TotalNetAmount
+FROM 
+    tbl_customer_invoice tci
+JOIN 
+    tbl_users_bill tub ON tci.FrId = tub.id
+WHERE 
+    tci.InvoiceDate >= '2024-01-01' 
+    AND tci.InvoiceDate <= '2024-12-31'
+    AND tci.FrId != 0
+GROUP BY 
+    tci.FrId, tub.ShopName, tci.InvoiceDate
+ORDER BY 
+    tci.InvoiceDate ASC, tci.FrId;
+    
+    
+    //samrudhi datewise
+    SELECT 
+    tci.FrId,
+    tub.ShopName,
+    tci.InvoiceDate,
+    SUM(tci.SubTotal) AS TotalSubTotal,
+    SUM(tci.Discount) AS TotalDiscount,
+    SUM(tci.NetAmount) AS TotalNetAmount
+FROM 
+    tbl_customer_invoice tci
+JOIN 
+    tbl_users_bill tub ON tci.FrId = tub.id
+WHERE 
+    tci.InvoiceDate >= '2024-01-01' 
+    AND tci.InvoiceDate <= '2024-12-31'
+    AND tci.FrId IN (
+        SELECT id FROM tbl_users WHERE ZoneId = 12 AND Roll = 5
+    )
+GROUP BY 
+    tci.FrId, tub.ShopName, tci.InvoiceDate
+ORDER BY 
+    tci.InvoiceDate ASC, tci.FrId;
+
+
+
+//2025
+SELECT 
+    tci.FrId,
+    tub.ShopName,
+    MONTH(tci.InvoiceDate) AS Month,
+    YEAR(tci.InvoiceDate) AS Year,
+    SUM(tci.SubTotal) AS TotalSubTotal,
+    SUM(tci.Discount) AS TotalDiscount,
+    SUM(tci.NetAmount) AS TotalNetAmount
+FROM (
+    SELECT FrId, InvoiceDate, SubTotal, Discount, NetAmount 
+    FROM tbl_customer_invoice
+    WHERE InvoiceDate BETWEEN '2025-01-01' AND '2025-12-31'
+
+    UNION ALL
+
+    SELECT FrId, InvoiceDate, SubTotal, Discount, NetAmount 
+    FROM tbl_customer_invoice_2025
+    WHERE InvoiceDate BETWEEN '2025-01-01' AND '2025-12-31'
+) AS tci
+JOIN tbl_users_bill tub ON tci.FrId = tub.id
+WHERE 
+    tci.FrId IN (
+        SELECT id FROM tbl_users WHERE ZoneId = 12 AND Roll = 5
+    )
+GROUP BY 
+    tci.FrId, tub.ShopName, YEAR(tci.InvoiceDate), MONTH(tci.InvoiceDate)
+ORDER BY 
+    tci.FrId, Year, Month;
+
