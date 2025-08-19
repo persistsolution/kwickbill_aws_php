@@ -1,9 +1,9 @@
 <?php
 class DBController {
-	private $host = "localhost";
-	private $user = "persistsolution_mahabuddy";
-	private $password = "(e3Xm33qkIrZ";
-	private $database = "persistsolution_mahabuddy";
+	private $host = "mysql-database.crq6yqcualdr.ap-south-1.rds.amazonaws.com";
+	private $user = "admin";
+	private $password = "admin12345";
+	private $database = "mahachai";
 	private $conn;
 	
 	function __construct() {
