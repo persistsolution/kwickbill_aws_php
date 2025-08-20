@@ -623,7 +623,7 @@ $balance = $netAmount
                                          <p class="small text-secondary" style="font-size:15px;"><strong>&#8377;<?php echo number_format($NetAmount,2);?></strong>
                                           <br><span style="font-size:12px;">Cash : ₹<?php echo number_format(countval('cash_payment',$frids,$Calendar),2);?></span>
                                          <br><span style="font-size:12px;">UPI : ₹<?php echo number_format(countval('upi_payment',$frids,$Calendar),2);?></span>
-                                         <br><span style="font-size:12px;">Avg : <?php echo number_format($NetAmount/$row88['TotInv'],2);?></span></p>
+                                         <br><span style="font-size:12px;">Avg : <?php if($row88['TotInv']>0){ echo number_format($NetAmount/$row88['TotInv'],2);} else{echo 0;}?></span></p>
                                     </div>
                                 </div>
                             </li>
