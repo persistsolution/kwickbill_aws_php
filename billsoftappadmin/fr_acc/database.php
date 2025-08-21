@@ -1,6 +1,6 @@
 <?php
 error_reporting(0);
-$con=mysqli_connect('localhost','persistsolution_mahabuddy','(e3Xm33qkIrZ','persistsolution_mahabuddy'); 
+$con=mysqli_connect('mysql-database.crq6yqcualdr.ap-south-1.rds.amazonaws.com','admin','admin12345','mahachai'); 
 if (! $con) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;

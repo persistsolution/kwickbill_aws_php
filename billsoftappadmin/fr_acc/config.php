@@ -1,9 +1,9 @@
 <?php
 error_reporting(0);
-$servername = "localhost";
-$username = "persistsolution_mahabuddy";
-$password = "(e3Xm33qkIrZ";
-$dbname = "persistsolution_mahabuddy"; 
+$servername = "mysql-database.crq6yqcualdr.ap-south-1.rds.amazonaws.com";
+$username = "admin";
+$password = "admin12345";
+$dbname = "mahachai";
 
 /// Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
