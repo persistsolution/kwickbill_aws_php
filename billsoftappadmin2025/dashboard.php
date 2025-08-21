@@ -708,7 +708,7 @@ $row_11 = getRecord($sql_11);
                                       
                                     </div> 
                                     <div class="col-auto" align="right" >
-                                         <p class="small text-secondary" style="font-size:15px;"><strong><?php echo number_format(($TotNetAmount)/$rncnt224,2);?></strong></p>
+                                         <p class="small text-secondary" style="font-size:15px;"><strong><?php if($rncnt224>0){ echo number_format(($TotNetAmount)/$rncnt224,2);} else {echo 0;}?></strong></p>
                                     </div> 
                                 </div>
                             </li>
