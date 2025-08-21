@@ -187,7 +187,7 @@ function timer(remaining) {
      $('#submit').text('Please Wait...');
     },
                 success:function(data){ 
-                  //alert(data);
+                  //alert(data);exit();
                   res = JSON.parse(data);
                   Status = res.Status;
                   Roll = res.Roll;

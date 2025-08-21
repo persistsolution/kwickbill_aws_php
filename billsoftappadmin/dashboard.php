@@ -7,16 +7,15 @@ $Page = "Dashboard";
 $user_id = $_SESSION['Admin']['id'];
 $uid = $_REQUEST['uid']; 
 if($_REQUEST['uid'] == ''){
-$sql11 = "SELECT * FROM tbl_users WHERE id='$user_id'";
+$sql11 = "SELECT * FROM tbl_users_bill WHERE id='$user_id'";
 $row = getRecord($sql11);
 $_SESSION['Admin'] = $row;
 }   
 else{
-$sql11 = "SELECT * FROM tbl_users WHERE id='$uid'";
+$sql11 = "SELECT * FROM tbl_users_bill WHERE id='$uid'";
 $row = getRecord($sql11);
 $_SESSION['Admin'] = $row;
 }
-//echo $sql11;
 $Roll = $row['Roll'];
 /*function RandomStringGenerator($n)
 {
@@ -386,7 +385,7 @@ foreach($row as $result){
   else{
       $frids = 0;
   }*/
-     $sql77 = "SELECT GROUP_CONCAT(id) AS FrId FROM tbl_users WHERE ZoneId='$zoneid' AND Roll=5";
+     $sql77 = "SELECT GROUP_CONCAT(id) AS FrId FROM tbl_users_bill WHERE ZoneId='$zoneid' AND Roll=5";
   $row77 = getRecord($sql77);
   $frids = $row77['FrId'];
   
@@ -462,10 +461,10 @@ foreach($row as $result){
         $TotNetAmount+=$NetAmount;
         $TotCashAmount+=countval('cash_payment',$frids,$Calendar);
    $TotUpiAmount+=countval('upi_payment',$frids,$Calendar);
-        $sql3 = "SELECT count(*) AS TotFr FROM tbl_users_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1 AND tu.Roll=5";
+        $sql3 = "SELECT count(*) AS TotFr FROM tbl_users_bill_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1 AND tu.Roll=5";
     $row3 = getRecord($sql3);
     
-    $sql4 = "SELECT count(*) AS TotEmp, SUM(tu.MonthlySalary) AS MonthlySalary FROM tbl_users tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1";
+    $sql4 = "SELECT count(*) AS TotEmp, SUM(tu.MonthlySalary) AS MonthlySalary FROM tbl_users_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1";
     $row4 = getRecord($sql4);
     
    
@@ -770,7 +769,7 @@ $row = getList($sql);
 foreach ($row as $result) {
     $zoneid = $result['id'];
     $zoneName = $result['Name'];
-   $sql77 = "SELECT GROUP_CONCAT(id) AS FrId FROM tbl_users WHERE ZoneId='$zoneid' AND Roll=5";
+   $sql77 = "SELECT GROUP_CONCAT(id) AS FrId FROM tbl_users_bill WHERE ZoneId='$zoneid' AND Roll=5";
     $row77 = getRecord($sql77);
     $frids = $row77['FrId'];
 
@@ -837,10 +836,10 @@ foreach ($row as $result) {
     $NetAmount = $row88['NetAmount'] ?? 0;
     
       
-        $sql3 = "SELECT count(*) AS TotFr FROM tbl_users_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1 AND tu.Roll=5";
+        $sql3 = "SELECT count(*) AS TotFr FROM tbl_users_bill_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1 AND tu.Roll=5";
     $row3 = getRecord($sql3);
     
-    $sql4 = "SELECT count(*) AS TotEmp, SUM(tu.MonthlySalary) AS MonthlySalary FROM tbl_users tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1";
+    $sql4 = "SELECT count(*) AS TotEmp, SUM(tu.MonthlySalary) AS MonthlySalary FROM tbl_users_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1";
     $row4 = getRecord($sql4);
     
      $avg = ($row88['TotInv'] > 0) ? ($row88['NetAmount'] / $row88['TotInv']) : 0;
