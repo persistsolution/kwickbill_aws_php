@@ -59,7 +59,7 @@ input[type=number] {
                             </div>
                             <div class="logo">
                                 <a href="index.php">
-                                    <img src="logo.jpg" alt="logo">
+                                    <img src="shalimarlogo.png" alt="logo">
                                 </a>
                             </div>
                             <h1>Welcome!</h1>

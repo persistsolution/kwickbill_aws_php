@@ -40,7 +40,7 @@ div.scrollmenu a:hover {
 <div class="app-brand demo">
 <span class="app-brand-logo demo">
 <a href="dashboard.php" class="app-brand-text demo sidenav-text font-weight-normal ml-2">	
-<img src="logo.jpg" alt="<?php echo $Proj_Title; ?>" class="img-fluid" style="height: 60px;">
+<img src="shalimarlogo.png" alt="<?php echo $Proj_Title; ?>" class="img-fluid" style="height: 60px;">
 </a>
 </span>
 <a href="dashboard.php" class="app-brand-text demo sidenav-text font-weight-normal ml-2">	
@@ -254,7 +254,7 @@ div.scrollmenu a:hover {
                     </a>
                 </li>
                 <?php } if(in_array("16", $Options)) {?>
-                <li class="sidenav-item">
+                <!-- <li class="sidenav-item">
                     <a href="view-allocate-products-vendor.php" class="sidenav-link">
                         <div> Allocate Products To Vendor</div>
                         <?php if($Page=='Allocate-Products') {?>
@@ -263,9 +263,9 @@ div.scrollmenu a:hover {
                         </div>
                         <?php } ?>
                     </a>
-                </li>
+                </li> -->
                 <?php } if(in_array("17", $Options)) {?>
-                <li class="sidenav-item">
+                <!-- <li class="sidenav-item">
                     <a href="common-master.php?pageid=3" class="sidenav-link">
                         <div>Division</div>
                         <?php if($Page=='Brand') {?>
@@ -329,7 +329,7 @@ div.scrollmenu a:hover {
                         </div>
                         <?php } ?>
                     </a>
-                </li>
+                </li> -->
                <?php } ?>
                 
             </ul>
@@ -386,7 +386,7 @@ div.scrollmenu a:hover {
                     </a>
                 </li>
                 <?php } if(in_array("27", $Options)) {?>
-                <li class="sidenav-item">
+                <!-- <li class="sidenav-item">
                     <a href="view-allocate-raw-products-vendor.php" class="sidenav-link">
                         <div> Allocate Products To Vendor</div>
                         <?php if($Page=='Allocate-Products') {?>
@@ -395,7 +395,7 @@ div.scrollmenu a:hover {
                         </div>
                         <?php } ?>
                     </a>
-                </li>
+                </li> -->
                 <?php } ?>
             </ul>
         </li>
@@ -815,7 +815,7 @@ div.scrollmenu a:hover {
 <li class="sidenav-item <?php if($MainPage=='Franchise-Report-2025') {?> open active <?php } ?>">
 <a href="javascript:" class="sidenav-link sidenav-toggle">
 
-<div>Franchise Reports 2025</div>
+<div>Franchise Reports</div>
 </a>
 <ul class="sidenav-menu"> 
 <?php if(in_array("51", $Options)) {?> 
@@ -966,7 +966,7 @@ div.scrollmenu a:hover {
     </ul>
     </li>
 <?php } if(in_array("63", $Options) || in_array("64", $Options) || in_array("65", $Options) || in_array("66", $Options) || in_array("67", $Options)) {?>
-<li class="sidenav-item <?php if($MainPage=='Franchise-Report') {?> open active <?php } ?>">
+<!-- <li class="sidenav-item <?php if($MainPage=='Franchise-Report') {?> open active <?php } ?>">
 <a href="javascript:" class="sidenav-link sidenav-toggle">
 
 <div>Franchise Reports 2024</div>
@@ -1030,7 +1030,7 @@ div.scrollmenu a:hover {
 </li>
 <?php } ?>
 </ul>
-</li> 
+</li>  -->
 
 <?php } ?>
  <li class="sidenav-item <?php if($MainPage=='Account2') {?> open active <?php } ?>">

@@ -14,7 +14,7 @@ if($conn->connect_error) {
 } else {
     // echo "Successfully Connected";
 }
-$Proj_Title = "MAHA BUDDY";
+$Proj_Title = "SHALIMAR";
 $SiteUrl = "https://rjorg.in/pandavcollege/";
 date_default_timezone_set("Asia/Kolkata");
 $CloseDate = "2024-12-31";

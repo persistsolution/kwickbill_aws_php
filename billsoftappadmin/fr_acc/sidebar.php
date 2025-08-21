@@ -40,7 +40,7 @@ div.scrollmenu a:hover {
 <div class="app-brand demo">
 <span class="app-brand-logo demo">
 <a href="dashboard.php" class="app-brand-text demo sidenav-text font-weight-normal ml-2">	
-<img src="logo.jpg" alt="<?php echo $Proj_Title; ?>" class="img-fluid" style="height: 60px;">
+<img src="shalimarlogo.png" alt="<?php echo $Proj_Title; ?>" class="img-fluid" style="height: 60px;">
 </a>
 </span>
 <a href="dashboard.php" class="app-brand-text demo sidenav-text font-weight-normal ml-2">	

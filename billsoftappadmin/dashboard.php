@@ -227,7 +227,7 @@ foreach($row as $result){
 <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
 </div>
 
- <h3>Welcome To Mahabuddy</h3>       
+ <h3>WELCOME TO SHALIMAR</h3>       
 <div class="row">
      <div class="col-lg-12">
       <div id="accordion2">

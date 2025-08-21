@@ -92,7 +92,7 @@ if($_GET['action'] == 'clearprod'){
 
 <div class="container-fluid flex-grow-1 container-p-y">
 <h4 class="font-weight-bold py-3 mb-0">Allocate Products To <?php echo $_GET['ShopName'];?> Franchise 
-<?php if($user_id == 2091 || $user_id == 2648 || $user_id == 9516){?>
+<?php if($user_id == 3 || $user_id == 1){?>
 <a href="allocate-selling-product.php?frid=<?php echo $_GET['frid'];?>&ShopName=<?php echo $_GET['ShopName'];?>&action=yes" class="badge badge-pill badge-warning" style="float:right;">Display Product</a>
 
 <?php } ?>
@@ -155,7 +155,7 @@ if($_GET['action'] == 'clearprod'){
         </tbody>
     </table>
     <br><br>
-    <?php if($user_id == 2091 || $user_id == 2648){?>
+    <?php if($user_id == 3){?>
     <a onClick="return confirm('Are you sure you want clear allocate product');"  href="allocate-selling-product.php?frid=<?php echo $_GET['frid'];?>&ShopName=<?php echo $_GET['ShopName'];?>&action=clearprod" class="badge badge-pill badge-danger" style="float:right;">Clear Allocate Product</a>&nbsp;&nbsp;
 <?php } ?>
 </div>

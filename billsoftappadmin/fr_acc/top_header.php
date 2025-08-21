@@ -40,7 +40,7 @@ $sql771 = "SELECT id,Options2 FROM tbl_users_bill WHERE id='$adminid'";
 <span class="navbar-toggler-icon"></span>
 </button>
 <div class="navbar-collapse collapse" id="layout-navbar-collapse">
-<img src="logon1.jpg" height="40px">
+<img src="../shalimarlogo.png" height="40px">
 <hr class="d-lg-none w-100 my-2">
 <div class="navbar-nav align-items-lg-center ml-auto">
 

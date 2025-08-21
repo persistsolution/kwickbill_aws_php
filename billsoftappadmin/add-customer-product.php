@@ -141,7 +141,7 @@ Other Products
 </div>
 
 
-<div class="form-group col-lg-2">
+<!-- <div class="form-group col-lg-2">
 <label class="form-label">Division </label>
   <select class="form-control" id="Division" name="Division" >
 <option selected="" disabled="" value="">Select Division</option>
@@ -235,7 +235,7 @@ Other Products
                 <option <?php if($row7['BrandDesc']==$rw['id']){ ?> selected <?php } ?> value="<?php echo $rw['id']; ?>"><?php echo $rw['Name']; ?></option>
               <?php } ?></select>
 <div class="clearfix"></div>
-</div>
+</div> -->
 
 </div>
 
