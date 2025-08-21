@@ -25,7 +25,7 @@ echo $_COOKIE["member_login"];
     <!-- Custom Stylesheet -->
     <link type="text/css" rel="stylesheet" href="logincss/assets/css/style.css">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="logincss/assets/css/skins/default.css">
-
+ 
 </head>
 <style>
 /* For Chrome, Safari, Edge, Opera */
