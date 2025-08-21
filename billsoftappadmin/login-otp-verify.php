@@ -61,7 +61,7 @@ include_once 'config.php';
                             <div class="typing">
                                 <h3>OTP Verification</h3>
                             </div>
-                            <?php if($_REQUEST['phone'] == '9595454957' || $_REQUEST['phone'] == '8956627166'){
+                            <?php if($_REQUEST['phone'] == '9595454957' || $_REQUEST['phone'] == '8767246610'){
                                 $fillotp = $_SESSION['otp'];
                                 //$fillotp = "";
                             }
