@@ -1,0 +1,21 @@
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  include_once(../config.php): Failed to open stream: No such file or directory in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 3
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  include_once(): Failed opening '../config.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 3
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  include_once(auth.php): Failed to open stream: No such file or directory in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 4
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  include_once(): Failed opening 'auth.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 4
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  include_once(../header_script.php): Failed to open stream: No such file or directory in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 20
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  include_once(): Failed opening '../header_script.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 20
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  Undefined array key "action" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 35
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  Undefined array key "FromDate" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 74
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  Undefined array key "ToDate" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 78
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  Undefined array key "FromDate" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 124
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  Undefined array key "ToDate" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 128
+[01-Jul-2025 09:29:48 UTC] PHP Warning:  Undefined variable $conn in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 134
+[01-Jul-2025 09:29:48 UTC] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php:134
+Stack trace:
+#0 {main}
+  thrown in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 134
+[01-Jul-2025 09:30:37 UTC] PHP Warning:  require_once(../config.php): Failed to open stream: No such file or directory in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 7
+[01-Jul-2025 09:30:37 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../config.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/credit-order-account/api/view-manage-credit-accounts.php on line 7

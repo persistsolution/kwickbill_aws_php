@@ -1,0 +1,9 @@
+[04-Jul-2025 09:12:18 UTC] PHP Warning:  require_once(../../config.php): Failed to open stream: No such file or directory in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/menu/view-sub-menu.php on line 7
+[04-Jul-2025 09:12:18 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../../config.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/menu/view-sub-menu.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/menu/view-sub-menu.php on line 7
+[04-Jul-2025 09:20:56 UTC] PHP Parse error:  Unclosed '{' on line 57 in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/menu/add-sub-menu.php on line 257
+[04-Jul-2025 09:23:47 UTC] PHP Parse error:  Unclosed '{' on line 57 in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/menu/add-sub-menu.php on line 257
+[04-Jul-2025 09:23:50 UTC] PHP Parse error:  Unclosed '{' on line 57 in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/menu/add-sub-menu.php on line 257
+[04-Jul-2025 09:23:51 UTC] PHP Parse error:  Unclosed '{' on line 57 in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/menu/add-sub-menu.php on line 257

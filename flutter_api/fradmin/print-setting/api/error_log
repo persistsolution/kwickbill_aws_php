@@ -1,0 +1,12 @@
+[01-Jul-2025 12:07:21 UTC] PHP Warning:  include_once(../config.php): Failed to open stream: No such file or directory in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/print-setting/api/invoice-print-setting.php on line 3
+[01-Jul-2025 12:07:21 UTC] PHP Warning:  include_once(): Failed opening '../config.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/print-setting/api/invoice-print-setting.php on line 3
+[01-Jul-2025 12:07:21 UTC] PHP Warning:  include_once(auth.php): Failed to open stream: No such file or directory in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/print-setting/api/invoice-print-setting.php on line 4
+[01-Jul-2025 12:07:21 UTC] PHP Warning:  include_once(): Failed opening 'auth.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/print-setting/api/invoice-print-setting.php on line 4
+[01-Jul-2025 12:07:21 UTC] PHP Warning:  Undefined array key "user_id" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/print-setting/api/invoice-print-setting.php on line 5
+[01-Jul-2025 12:07:21 UTC] PHP Warning:  Undefined array key "user_id" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/print-setting/api/invoice-print-setting.php on line 6
+[01-Jul-2025 12:07:21 UTC] PHP Warning:  include_once(../header_script.php): Failed to open stream: No such file or directory in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/print-setting/api/invoice-print-setting.php on line 20
+[01-Jul-2025 12:07:21 UTC] PHP Warning:  include_once(): Failed opening '../header_script.php' for inclusion (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/print-setting/api/invoice-print-setting.php on line 20
+[01-Jul-2025 12:07:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getRecord() in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/print-setting/api/invoice-print-setting.php:37
+Stack trace:
+#0 {main}
+  thrown in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/print-setting/api/invoice-print-setting.php on line 37

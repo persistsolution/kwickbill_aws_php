@@ -1,0 +1,17 @@
+[30-Jun-2025 10:56:59 UTC] PHP Warning:  Undefined array key "user_id" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php on line 1
+[30-Jun-2025 11:00:08 UTC] PHP Warning:  Undefined array key "user_id" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php on line 1
+[30-Jun-2025 11:01:03 UTC] PHP Warning:  Undefined array key "user_id" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php on line 1
+[30-Jun-2025 11:01:03 UTC] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php:160
+Stack trace:
+#0 /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php(160): mysqli_stmt->bind_param('sdisss', 'dsd', '10', '20', 'Food', '68626e6f608fb_1...', '68626e6f60a5c_n...', '68626e6f60b07_s...', '68626e6f60bd9_s...')
+#1 {main}
+  thrown in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php on line 160
+[30-Jun-2025 11:01:29 UTC] PHP Warning:  Undefined array key "user_id" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php on line 1
+[30-Jun-2025 11:01:29 UTC] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php:162
+Stack trace:
+#0 /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php(162): mysqli_stmt->bind_param('sdisss', 'dsd', '10', '20', 'Food', '68626e891060f_1...', '68626e89107a0_n...', '68626e891083e_s...', '68626e8910907_s...')
+#1 {main}
+  thrown in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php on line 162
+[30-Jun-2025 11:02:15 UTC] PHP Warning:  Undefined array key "user_id" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php on line 1
+[30-Jun-2025 11:02:19 UTC] PHP Warning:  Undefined array key "user_id" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php on line 1
+[30-Jun-2025 11:02:31 UTC] PHP Warning:  Undefined array key "user_id" in /home/persistsolution/public_html/kwickbill.com/flutter_api/fradmin/add_product.php on line 1
