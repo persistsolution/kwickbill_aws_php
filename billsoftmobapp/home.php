@@ -30,13 +30,13 @@ else{
 }
 
 if($Roll == 5){
-    echo "<script>window.location.href='../billsoftmobappfr2025/home.php?frid=$BillSoftFrId';</script>";exit();
+    echo "<script>window.location.href='../billsoftmobappfr/home.php?frid=$BillSoftFrId';</script>";exit();
 }
 else if($Roll == 105){
     echo "<script>window.location.href='../billsoft_partnerapp/home.php';</script>";exit();
 }
 else if($BillSoftFrId!=0){
-    echo "<script>window.location.href='../billsoftmobappfr2025/home.php?frid=$BillSoftFrId';</script>";exit();
+    echo "<script>window.location.href='../billsoftmobappfr/home.php?frid=$BillSoftFrId';</script>";exit();
 }
 if($_REQUEST['frid']!=''){
     $_SESSION['FranchiseId'] = $_REQUEST['frid'];

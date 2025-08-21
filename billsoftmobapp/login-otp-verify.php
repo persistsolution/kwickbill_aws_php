@@ -139,7 +139,7 @@ $UserId = $_SESSION['User']['id'];
                     window.location.href = '../billsoft_partnerapp/home.php';
                     }
                     else{
-                      window.location.href = '../billsoftmobappfr2025/home.php?frid='+Roll;  
+                      window.location.href = '../billsoftmobappfr/home.php?frid='+Roll;  
                     }
                    Android.loginUser(Username,uid,0);
                     }, 1000);
