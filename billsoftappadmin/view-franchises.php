@@ -147,7 +147,7 @@ function franchiseBadge($code) {
             <?php 
            
             $sql = "SELECT tu.*,tut.Name As User_Type FROM tbl_users_bill tu LEFT JOIN tbl_user_type tut ON tu.UserType=tut.id WHERE tu.Roll=5 ";
-            $sql.=" AND tu.id IN ($CocoFranchiseAccess)";
+            //$sql.=" AND tu.id IN ($CocoFranchiseAccess)";
             if($_POST['OwnFranchise']){
                 $OwnFranchise = $_POST['OwnFranchise'];
                 if($OwnFranchise == 'all'){
