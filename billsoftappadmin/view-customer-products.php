@@ -94,8 +94,8 @@ if($_REQUEST["action"]=="delete")
 <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-              <!-- <th>Photo</th>
-               <th>Barcode No</th>-->
+               <th>Photo</th>
+              <!-- <th>Barcode No</th>-->
                 <th>Id</th>
                 <th>Product name</th>
                 <th>Barcode No</th>
@@ -130,6 +130,13 @@ if($_REQUEST["action"]=="delete")
               
   
   <td><?php echo $row['id'];?></td>
+   <td> <?php if($row["Photo"] == '') {?>
+                  <img src="user_icon.jpg" class="d-block ui-w-40 rounded-circle"  style="width: 40px;height: 40px;"> 
+                 <?php } else if(file_exists('../uploads/'.$row["Photo"])){?>
+                 <img src="../uploads/<?php echo $row["Photo"];?>" class="d-block ui-w-40 rounded-circle" alt="" style="width: 40px;height: 40px;">
+                  <?php }  else{?>
+                 <img src="user_icon.jpg" class="d-block ui-w-40 rounded-circle" style="width: 40px;height: 40px;"> 
+             <?php } ?></td>
                 <td><?php echo $row['ProductName']; ?></td>
               <td><?php echo $row['BarcodeNo']; ?></td>
                
