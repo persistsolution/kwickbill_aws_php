@@ -94,9 +94,10 @@ if($_REQUEST["action"]=="delete")
 <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-               <th>Photo</th>
+              
               <!-- <th>Barcode No</th>-->
                 <th>Id</th>
+                 <th>Photo</th>
                 <th>Product name</th>
                 <th>Barcode No</th>
                 <th>Category</th>
