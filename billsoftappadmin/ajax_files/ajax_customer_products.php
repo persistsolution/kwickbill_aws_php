@@ -65,19 +65,33 @@ if ($_POST['action'] == 'Add') {
         $modified_time = gmdate('Y-m-d H:i:s.') . gettimeofday()['usec'];
         $CreatedDate   = date('Y-m-d');
 
-        // Handle photo upload
-        $Photo = $_POST['OldPhoto'] ?? '';
-        if (!empty($_FILES['Photo']['name'])) {
-            $randno = rand(1, 100);
-            $fnm = pathinfo($_FILES["Photo"]["name"], PATHINFO_FILENAME);
-            $fnm = str_replace(" ", "_", $fnm);
-            $ext = "." . pathinfo($_FILES["Photo"]["name"], PATHINFO_EXTENSION);
-            $dest = '../../uploads/' . $randno . "_" . $fnm . $ext;
-            $imagepath = $randno . "_" . $fnm . $ext;
-            if (move_uploaded_file($_FILES['Photo']['tmp_name'], $dest)) {
-                $Photo = $imagepath;
-            }
-        }
+
+        
+       // absolute uploads dir
+$uploadDir = realpath(__DIR__ . "/../../uploads");
+
+// check folder
+if (!$uploadDir) {
+    die("Uploads folder not found.");
+}
+
+$randno = rand(1, 100);
+$fnm = pathinfo($_FILES["Photo"]["name"], PATHINFO_FILENAME);
+$fnm = str_replace(" ", "_", $fnm);
+$ext = "." . pathinfo($_FILES["Photo"]["name"], PATHINFO_EXTENSION);
+
+$dest = $uploadDir . DIRECTORY_SEPARATOR . $randno . "_" . $fnm . $ext;
+$imagepath = $randno . "_" . $fnm . $ext;
+
+if (move_uploaded_file($_FILES['Photo']['tmp_name'], $dest)) {
+    $Photo = $imagepath;
+} else {
+    echo "Failed to move file.<br>";
+    echo "Temp: " . $_FILES['Photo']['tmp_name'] . "<br>";
+    echo "Dest: " . $dest . "<br>";
+    echo "Error Code: " . $_FILES['Photo']['error'] . "<br>";
+    print_r(error_get_last());
+}
 
         $Code = RandomStringGenerator(10);
 
@@ -132,7 +146,8 @@ if ($_POST['action'] == 'Add') {
                         CgstAmt='$CgstAmt', SgstAmt='$SgstAmt', IgstAmt='$IgstAmt', BarcodeNo='$BarcodeNo', StockQty='$StockQty',
                         TempPrdId='$TempPrdId', MinQty='$MinQty', Photo='$Photo'
                     WHERE id='$id'";
-            if (!$conn->query($sql)) throw new Exception("Error updating product 2: " . $conn->error);
+                    $conn->query($sql);
+           // if (!$conn->query($sql)) throw new Exception("Error updating product 2: " . $conn->error);
 
             // UPDATE tbl_cust_products_2025
             $sql = "UPDATE tbl_cust_products_2025 
