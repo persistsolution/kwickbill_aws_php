@@ -551,9 +551,9 @@ if($_POST['action'] == 'showProduct'){?>
                                 <a href="javascript:void(0)" onclick="addCart(<?php echo $result2['id'];?>)">
                                
                                     <?php if($result2['Photo']==''){?>
-                                     <img src="no_image.jpg" class="img-fluid" alt="images" style="width:163px;110px;">
+                                     <img src="no_image.jpg" class="img-fluid" alt="images" style="width:163px;">
                                     <?php } else { ?>
-                                    <img src="../uploads/<?php echo $result2['Photo'];?>" class="img-fluid" alt="images" style="width:163px;110px;">
+                                    <img src="../uploads/<?php echo $result2['Photo'];?>" class="img-fluid" alt="images" style="width:163px;">
                                     <?php } ?>
                                 </a>
                                 <div align="center" style="padding-top:2px;">

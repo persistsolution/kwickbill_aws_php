@@ -563,9 +563,9 @@ $row22 = getRecord($sql22);
                                           <p class="small " style="text-transform:capitalize;color:black">Franchise : <?php echo $row3['TotFr'];?><br>
                                           Employee : <?php echo $row4['TotEmp'];?> | Salary : <?php echo $row4['MonthlySalary'];?><br> 
                                           Total Invoice : <?php echo $row88['TotInv'];?> <br>
-                                          QSR KITCHEN SALES : <?= $row21['TotSell']; ?> | &#8377;<?= $row21['NetAmount']; ?> <br>
+                                          <!-- QSR KITCHEN SALES : <?= $row21['TotSell']; ?> | &#8377;<?= $row21['NetAmount']; ?> <br>
                                           PACK FOOD SALES : <?= $row2['TotSell']; ?> | &#8377;<?= $row2['NetAmount']; ?> <br>
-                                          CROSS SALES : <?= $row22['TotSell']; ?> | &#8377;<?= $row22['NetAmount']; ?> <br>
+                                          CROSS SALES : <?= $row22['TotSell']; ?> | &#8377;<?= $row22['NetAmount']; ?> <br> -->
                                           DISCOUNT : <?php echo $row88['TotDiscount'];?><br></p>
                                        <!--<p class="small " style="text-transform:capitalize;color:#009eff;">Last Sync : <?php echo $sync_time;?></p>-->
                                        

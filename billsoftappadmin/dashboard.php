@@ -461,13 +461,12 @@ foreach($row as $result){
         $TotNetAmount+=$NetAmount;
         $TotCashAmount+=countval('cash_payment',$frids,$Calendar);
    $TotUpiAmount+=countval('upi_payment',$frids,$Calendar);
-        $sql3 = "SELECT count(*) AS TotFr FROM tbl_users_bill_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1 AND tu.Roll=5";
+        $sql3 = "SELECT count(*) AS TotFr FROM tbl_users_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1 AND tu.Roll=5";
     $row3 = getRecord($sql3);
     
     $sql4 = "SELECT count(*) AS TotEmp, SUM(tu.MonthlySalary) AS MonthlySalary FROM tbl_users_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1";
     $row4 = getRecord($sql4);
-    
-   
+
    
    // MRP Product
 $sql2 = "SELECT IFNULL(SUM(tc.Total),0) AS NetAmount, IFNULL(SUM(tc.Qty),0) AS TotSell 
@@ -608,6 +607,16 @@ $sql_11 = "SELECT IFNULL(SUM(tc.Total),0) AS NetAmount, IFNULL(SUM(tc.Qty),0) AS
            $sql_11.=" AND tc.CreatedDate='".date('Y-m-d')."'"; 
         }
 $row_11 = getRecord($sql_11);
+
+
+$TotSell = $row_11['TotSell'];
+$TotalCrossSale = $row99['TotalCrossSale'];
+
+if ($TotalCrossSale > 0) {
+    $percentage = number_format(($TotSell / $TotalCrossSale) * 100, 2);
+} else {
+    $percentage = "0.00"; // or show "N/A"
+}
         ?>
         <div class="col-lg-4">
                 <div class="card mb-2">
@@ -625,10 +634,10 @@ $row_11 = getRecord($sql_11);
                                                Franchise : <?php echo $row3['TotFr'];?><br>
                                           Employee : <?php echo $row4['TotEmp'];?> | Salary : <?php echo $row4['MonthlySalary'];?><br>
                                           Total Invoice : <?php echo $row88['TotInv'];?> <br>
-                                          QSR KITCHEN SALES : <?= $row21['TotSell']; ?> | &#8377;<?= $row21['NetAmount']; ?> <br>
+                                          <!-- QSR KITCHEN SALES : <?= $row21['TotSell']; ?> | &#8377;<?= $row21['NetAmount']; ?> <br>
                                           PACK FOOD SALES : <?= $row2['TotSell']; ?> | &#8377;<?= $row2['NetAmount']; ?> <br>
                                           CROSS SALES : <?= $row22['TotSell']; ?> | &#8377;<?= $row22['NetAmount']; ?> <br>
-                                          TARGET CROSS SALES : <?php echo $row_11['TotSell'];?> / <?php echo $row99['TotalCrossSale'];?> (<?php echo number_format(($row_11['TotSell']/$row99['TotalCrossSale'])*100,2);?>%)<br>
+                                          TARGET CROSS SALES : <?php echo $TotSell;?> / <?php echo $TotalCrossSale;?> (<?php echo $percentage;?>%)<br> -->
                                           DISCOUNT : <?php echo $row88['TotDiscount'];?><br></p>
                                        <!--<p class="small " style="text-transform:capitalize;color:#009eff;">Last Sync : <?php echo $sync_time;?></p>-->
                                        
@@ -836,7 +845,7 @@ foreach ($row as $result) {
     $NetAmount = $row88['NetAmount'] ?? 0;
     
       
-        $sql3 = "SELECT count(*) AS TotFr FROM tbl_users_bill_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1 AND tu.Roll=5";
+        $sql3 = "SELECT count(*) AS TotFr FROM tbl_users_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1 AND tu.Roll=5";
     $row3 = getRecord($sql3);
     
     $sql4 = "SELECT count(*) AS TotEmp, SUM(tu.MonthlySalary) AS MonthlySalary FROM tbl_users_bill tu WHERE tu.ZoneId = '$zoneid' AND tu.Status=1";

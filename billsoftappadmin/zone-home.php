@@ -514,9 +514,9 @@ $credit = countval('credit',$result['FrId'],$Calendar);
                                         <h6 class=" mb-1" style="color:black;font-size:14px;font-weight:500;"><?php echo $result['ShopName'];?></h6>
                                           <span class="small text-secondary" style=""><?php echo $result['Address'];?></span>
                                           <p class="small " style="text-transform:capitalize;color:black">Employees : <?php echo $row3['TotEmp'];?> | Salary : <?php echo $row3['MonthlySalary'];?> <br>
-                                          QSR KITCHEN SALES : <?= $row21['TotSell']; ?> | &#8377;<?= $row21['NetAmount']; ?> <br>
+                                          <!-- QSR KITCHEN SALES : <?= $row21['TotSell']; ?> | &#8377;<?= $row21['NetAmount']; ?> <br>
                                           PACK FOOD SALES : <?= $row2['TotSell']; ?> | &#8377;<?= $row2['NetAmount']; ?> <br>
-                                          CROSS SALES : <?= $row22['TotSell']; ?> | &#8377;<?= $row22['NetAmount']; ?> <br>
+                                          CROSS SALES : <?= $row22['TotSell']; ?> | &#8377;<?= $row22['NetAmount']; ?> <br> -->
                                           DISCOUNT : <?php echo $result['TotDiscount'];?>
                                           <br></p>
                                        <p class="small " style="text-transform:capitalize;color:#009eff;">Last Sync : <?php echo $sync_time;?></p>
