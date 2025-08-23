@@ -75,6 +75,7 @@ if (!$uploadDir) {
     die("Uploads folder not found.");
 }
 
+// $Photo = $_POST['OldPhoto'] ?? '';
 $randno = rand(1, 100);
 $fnm = pathinfo($_FILES["Photo"]["name"], PATHINFO_FILENAME);
 $fnm = str_replace(" ", "_", $fnm);
@@ -85,12 +86,8 @@ $imagepath = $randno . "_" . $fnm . $ext;
 
 if (move_uploaded_file($_FILES['Photo']['tmp_name'], $dest)) {
     $Photo = $imagepath;
-} else {
-    echo "Failed to move file.<br>";
-    echo "Temp: " . $_FILES['Photo']['tmp_name'] . "<br>";
-    echo "Dest: " . $dest . "<br>";
-    echo "Error Code: " . $_FILES['Photo']['error'] . "<br>";
-    print_r(error_get_last());
+} else{
+  $Photo = $_POST['OldPhoto'];
 }
 
         $Code = RandomStringGenerator(10);

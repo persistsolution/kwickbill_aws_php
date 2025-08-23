@@ -478,7 +478,7 @@ function getProdPrice(CgstPer,SgstPer,IgstPer,DiscPer,SubTotal){
             var FinalPrice = Number(SubTotal)-Number(DiscAmt);
             $('#MinPrice').val(parseFloat(FinalPrice).toFixed(2));
             //var MinPrice = Number(prodprice);
-            var MinPrice = Number(FinalPrice)/Number(1.05);
+            var MinPrice = Number(FinalPrice);
             $('#ProdPrice').val(parseFloat(MinPrice).toFixed(2));
             var GstAmt = Number(FinalPrice) - Number(MinPrice);
             $('#GstAmt').val(parseFloat(GstAmt).toFixed(2));
