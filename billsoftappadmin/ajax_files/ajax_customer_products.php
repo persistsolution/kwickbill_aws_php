@@ -89,7 +89,7 @@ if (move_uploaded_file($_FILES['Photo']['tmp_name'], $dest)) {
 } else{
   $Photo = $_POST['OldPhoto'];
 }
-
+echo $Photo;exit();
         $Code = RandomStringGenerator(10);
 
         if ($id == '') {
