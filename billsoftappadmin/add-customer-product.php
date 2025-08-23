@@ -292,7 +292,7 @@ Other Products
 <label class="form-label">CGST%<span class="text-danger">*</span></label>
 <div class="input-group">
 
-<input type="text" id="CgstPer" name="CgstPer" class="form-control" value="2.5" readonly required="" onKeyPress="return isNumberKey(event)" oninput="getProdPrice(document.getElementById('CgstPer').value,document.getElementById('SgstPer').value,document.getElementById('IgstPer').value,document.getElementById('DiscPer').value,document.getElementById('SubTotal').value)">
+<input type="text" id="CgstPer" name="CgstPer" class="form-control" value="0" required="" onKeyPress="return isNumberKey(event)" oninput="getProdPrice(document.getElementById('CgstPer').value,document.getElementById('SgstPer').value,document.getElementById('IgstPer').value,document.getElementById('DiscPer').value,document.getElementById('SubTotal').value)">
 
 <div class="clearfix"></div>
 </div>
@@ -302,7 +302,7 @@ Other Products
 <label class="form-label">SGST%<span class="text-danger">*</span></label>
 <div class="input-group">
 
-<input type="text" id="SgstPer" name="SgstPer" class="form-control" value="2.5" readonly required="" onKeyPress="return isNumberKey(event)" oninput="getProdPrice(document.getElementById('CgstPer').value,document.getElementById('SgstPer').value,document.getElementById('IgstPer').value,document.getElementById('DiscPer').value,document.getElementById('SubTotal').value)">
+<input type="text" id="SgstPer" name="SgstPer" class="form-control" value="0" required="" onKeyPress="return isNumberKey(event)" oninput="getProdPrice(document.getElementById('CgstPer').value,document.getElementById('SgstPer').value,document.getElementById('IgstPer').value,document.getElementById('DiscPer').value,document.getElementById('SubTotal').value)">
 
 <div class="clearfix"></div>
 </div>
@@ -312,7 +312,7 @@ Other Products
 <label class="form-label">IGST%<span class="text-danger">*</span></label>
 <div class="input-group">
 
-<input type="text" id="IgstPer" name="IgstPer" class="form-control" value="0" readonly required="" onKeyPress="return isNumberKey(event)" oninput="getProdPrice(document.getElementById('CgstPer').value,document.getElementById('SgstPer').value,document.getElementById('IgstPer').value,document.getElementById('DiscPer').value,document.getElementById('SubTotal').value)">
+<input type="text" id="IgstPer" name="IgstPer" class="form-control" value="0" required="" onKeyPress="return isNumberKey(event)" oninput="getProdPrice(document.getElementById('CgstPer').value,document.getElementById('SgstPer').value,document.getElementById('IgstPer').value,document.getElementById('DiscPer').value,document.getElementById('SubTotal').value)">
 
 <div class="clearfix"></div>
 </div>
