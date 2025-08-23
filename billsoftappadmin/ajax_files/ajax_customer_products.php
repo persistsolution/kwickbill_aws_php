@@ -86,10 +86,14 @@ $imagepath = $randno . "_" . $fnm . $ext;
 
 if (move_uploaded_file($_FILES['Photo']['tmp_name'], $dest)) {
     $Photo = $imagepath;
-} else{
-  $Photo = $_POST['OldPhoto'];
+} else {
+    echo "Failed to move file.<br>";
+    echo "Temp: " . $_FILES['Photo']['tmp_name'] . "<br>";
+    echo "Dest: " . $dest . "<br>";
+    echo "Error Code: " . $_FILES['Photo']['error'] . "<br>";
+    print_r(error_get_last());
 }
-echo $Photo;exit();
+exit();
         $Code = RandomStringGenerator(10);
 
         if ($id == '') {
